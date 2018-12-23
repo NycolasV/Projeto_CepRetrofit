@@ -18,6 +18,7 @@ import projetos.nv.cepretrofit.models.Endereco;
 
 public class ClienteDAO extends SQLiteOpenHelper {
 
+    private EnderecoDAO enderecoDAO;
     public static final String nome_tabela = "tb_cliente";
     public static final String coluna_id = "id";
     public static final String coluna_nomeCompleto = "nomeCompleto";
@@ -101,16 +102,80 @@ public class ClienteDAO extends SQLiteOpenHelper {
             }
 
             // Pegando o endereco da tabela tb_enderecos
-            Endereco endereco = new Endereco();
-            endereco.setId(c.getLong(c.getColumnIndex("id")));
-            endereco.setCep(c.getString(c.getColumnIndex("cep")));
-            endereco.setNumero(c.getInt(c.getColumnIndex("numero")));
-            endereco.setComplemento(c.getString(c.getColumnIndex("complemento")));
-            cliente.setEndereco(endereco);
+            cliente.setEndereco(enderecoDAO.buscar(c.getLong(c.getColumnIndex("FK_endereco"))));
 
             clientes.add(cliente);
         }
 
         return clientes;
+    }
+
+    public Cliente buscar(Long clienteId) {
+        String sql = "SELECT * FROM tb_cliente WHERE id = ?";
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(sql,new String[]{String.valueOf(clienteId)});
+        c.moveToFirst();
+
+        Cliente cliente = new Cliente();
+
+        cliente.setId(c.getLong(c.getColumnIndex("id")));
+        cliente.setNomeCompleto(c.getString(c.getColumnIndex("nomeCompleto")));
+        cliente.setCpf(c.getString(c.getColumnIndex("cpf")));
+
+        // Convertendo String para date
+        String dateString = c.getString(c.getColumnIndex("dataNascimento"));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        try {
+            Date date = format.parse(dateString);
+            cliente.setDataNascimento(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        // Pegando o endereco da tabela tb_enderecos
+        cliente.setEndereco(enderecoDAO.buscar(c.getLong(c.getColumnIndex("FK_endereco"))));
+
+        db.close();
+
+        return cliente;
+    }
+
+    public List<Cliente> buscarPorNome(String textoPesquisado) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        try {
+            String sql = "SELECT * FROM tb_cliente WHERE nomeCompleto Like'"+ textoPesquisado +"%'";
+
+            Cursor c = db.rawQuery(sql, null);
+            List<Cliente> clienteProcurado = new ArrayList<>();
+
+            while (c.moveToNext()){
+                Cliente cliente = new Cliente();
+
+                cliente.setId(c.getLong(c.getColumnIndex("id")));
+                cliente.setNomeCompleto(c.getString(c.getColumnIndex("nomeCompleto")));
+                cliente.setCpf(c.getString(c.getColumnIndex("cpf")));
+
+                // Convertendo String para date
+                String dateString = c.getString(c.getColumnIndex("dataNascimento"));
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                try {
+                    Date date = format.parse(dateString);
+                    cliente.setDataNascimento(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                // Pegando o endereco da tabela tb_enderecos
+                cliente.setEndereco(enderecoDAO.buscar(c.getLong(c.getColumnIndex("FK_endereco"))));
+
+                clienteProcurado.add(cliente);
+            }
+
+            c.close();
+            return  clienteProcurado;
+        }finally {
+            db.close();
+        }
     }
 }

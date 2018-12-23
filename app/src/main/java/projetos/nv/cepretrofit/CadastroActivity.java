@@ -16,18 +16,32 @@ import retrofit2.Response;
 
 public class CadastroActivity extends AppCompatActivity {
 
-    private EditText cep;
-    private TextView resposta;
+    private EditText nomeCompleto, cpf, dataNascimento;
+    private EditText cep, numero, complemento;
+    private TextView logradouro, bairro, localidade, uf;
     private Button btnBuscarCep;
+    private Button btnCadastrarCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        cep = findViewById(R.id.etMain_cep);
-        resposta = findViewById(R.id.etMain_resposta);
-        btnBuscarCep = findViewById(R.id.btnMain_buscarCep);
+        nomeCompleto = findViewById(R.id.nomeCompletoId);
+        cpf = findViewById(R.id.cpfId);
+        dataNascimento = findViewById(R.id.dataNascimentoId);
+
+        cep = findViewById(R.id.cepId);
+        numero = findViewById(R.id.numeroId);
+        complemento = findViewById(R.id.complementoId);
+        logradouro = findViewById(R.id.logradouroId);
+        bairro = findViewById(R.id.bairroId);
+        localidade = findViewById(R.id.localidadeId);
+        uf = findViewById(R.id.ufId);
+
+        btnBuscarCep = findViewById(R.id.btnBuscarCep);
+        btnCadastrarCliente = findViewById(R.id.btnCadastrarCliente);
+
         btnBuscarCep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,7 +50,10 @@ public class CadastroActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Endereco> call, Response<Endereco> response) {
                         Endereco endereco = response.body();
-                        resposta.setText(endereco.toString());
+                        logradouro.setText(endereco.getLogradouro());
+                        bairro.setText(endereco.getBairro());
+                        localidade.setText(endereco.getLocalidade());
+                        uf.setText(endereco.getUf());
                     }
 
                     @Override

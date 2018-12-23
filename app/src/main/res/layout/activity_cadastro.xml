@@ -1,63 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:fillViewport="true">-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadastroActivity"
-    android:orientation="vertical"
-    android:padding="15dp">
+    android:fillViewport="true">
 
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Cadastro de clientes"-->
-        <!--android:textAlignment="center"-->
-        <!--android:textFontWeight="bold"-->
-        <!--android:textSize="30dp"-->
-        <!--android:textColor="@color/colorBlack"/>-->
-
-    <EditText
-        android:digits="0123456789"
-        android:layout_height="wrap_content"
-        android:hint="CEP"
-        android:id="@+id/etMain_cep"
-        android:textColor="#595959"
-        android:textSize="25sp"
-        android:inputType="number"
-        android:layout_width="match_parent"/>
-
-    <LinearLayout
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_width="match_parent">
-
-        <Button
-            android:background="@color/colorPrimary"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnMain_buscarCep"
-            android:layout_marginBottom="10dp"
-            android:padding="10dp"
-            android:text="Buscar CEP"
-            android:textColor="#FDFDFD"
-            android:textSize="22sp"
-            android:layout_width="wrap_content"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/etMain_resposta"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="30dp"
-        android:textColor="#595959"
-        android:textSize="20sp" />
-</LinearLayout>
-<!--</ScrollView>-->
+        android:orientation="vertical"
+        android:padding="15dp"
+        tools:context=".CadastroActivity">
+
+        <EditText
+            android:id="@+id/nomeCompletoId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:hint="@string/inserir_nome_completo"
+            android:inputType="textPersonName|text"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_marginBottom="15dp"/>
+
+        <EditText
+            android:id="@+id/cpfId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:hint="@string/inserir_cpf"
+            android:inputType="number"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_below="@id/nomeCompletoId"
+            android:layout_marginBottom="15dp"/>
+
+        <EditText
+            android:id="@+id/dataNascimentoId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:hint="@string/inserir_data_nascimento"
+            android:inputType="date"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_below="@id/cpfId"
+            android:layout_marginBottom="15dp"/>
+
+        <EditText
+            android:id="@+id/cepId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:hint="@string/inserir_cep"
+            android:inputType="number"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_below="@id/dataNascimentoId"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btnBuscarCep"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/btnBuscarCep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/buscar"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_below="@id/dataNascimentoId"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="15dp"/>
+
+        <EditText
+            android:id="@+id/numeroId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/numero"
+            android:inputType="number"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_below="@id/cepId"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/complementoId"
+            android:layout_marginBottom="15dp"/>
+
+
+        <EditText
+            android:id="@+id/complementoId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:hint="@string/complemento"
+            android:inputType="text"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_below="@id/btnBuscarCep"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            android:id="@+id/logradouroId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:text="@string/logradouro"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_below="@id/numeroId"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/bairroId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:text="@string/bairro"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_below="@id/logradouroId"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/localidadeId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:text="@string/cidade"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_below="@id/bairroId"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/ufId"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/ufId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:ems="5"
+            android:text="@string/uf"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_below="@id/bairroId"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/btnCadastrarCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/cadastrar"
+            android:background="@color/colorBlack"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:layout_below="@id/localidadeId"
+            android:padding="5dp"/>
+    </RelativeLayout>
+</ScrollView>
