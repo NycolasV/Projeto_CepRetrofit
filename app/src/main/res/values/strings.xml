@@ -13,5 +13,5 @@
     <string name="bairro">Bairro...</string>
     <string name="cidade">Cidade...</string>
     <string name="uf">UF...</string>
-    <string name="cadastrar">Cadastrar...</string>
+    <string name="cadastrar">Cadastrar</string>
 </resources>

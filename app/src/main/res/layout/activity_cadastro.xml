@@ -41,18 +41,20 @@
             android:layout_below="@id/nomeCompletoId"
             android:layout_marginBottom="15dp"/>
 
-        <EditText
+        <TextView
             android:id="@+id/dataNascimentoId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:ems="10"
-            android:hint="@string/inserir_data_nascimento"
+            android:text="@string/inserir_data_nascimento"
             android:inputType="date"
-            android:textColorHint="@color/colorBlack"
+            android:textColor="@color/colorBlack"
             android:textSize="20sp"
             android:textStyle="normal"
             android:layout_below="@id/cpfId"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp"
             android:layout_marginBottom="15dp"/>
 
         <EditText
@@ -180,6 +182,6 @@
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             android:layout_below="@id/localidadeId"
-            android:padding="5dp"/>
+            android:padding="10dp"/>
     </RelativeLayout>
 </ScrollView>
