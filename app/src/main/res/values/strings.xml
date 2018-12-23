@@ -14,4 +14,8 @@
     <string name="cidade">Cidade...</string>
     <string name="uf">UF...</string>
     <string name="cadastrar">Cadastrar</string>
+    <string name="nome">Nome:</string>
+    <string name="cpf">CPF:</string>
+    <string name="data_nascimento">Data de nascimento:</string>
+    <string name="cep">CEP:</string>
 </resources>
