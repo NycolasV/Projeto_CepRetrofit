@@ -41,7 +41,7 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        
+
         cadastroDAO = new CadastroDAO(getApplicationContext());
         helper = new CadastroHelper(this);
         cep = helper.getCep();
@@ -69,8 +69,8 @@ public class CadastroActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month+1;
-                String dataString = dayOfMonth+"/"+month+"/"+year;
+                month = month + 1;
+                String dataString = dayOfMonth + "/" + month + "/" + year;
                 dataNascimento.setText(dataString);
             }
         };
@@ -94,11 +94,10 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        Cliente clienteClicked = (Cliente) intent.getSerializableExtra("cliente");
-
-        if (clienteClicked != null)
-        {
+        final Bundle extras = getIntent().getExtras();
+        Long clienteId = (extras != null) ? extras.getLong("clienteId") : null;
+        if (clienteId != null) {
+            Cliente clienteClicked = cadastroDAO.buscarCliente(clienteId);
             helper.preencherCliente(clienteClicked);
         }
 
@@ -107,7 +106,7 @@ public class CadastroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 cadastroDAO = new CadastroDAO(CadastroActivity.this);
                 Endereco endereco = helper.inserirEndereco();
-                Cliente cliente = helper.inserirCliente();
+                Cliente cliente = helper.inserirCliente(endereco);
 
                 if (cliente.getId() != null) {
                     cadastroDAO.alterarEndereco(endereco);
@@ -118,9 +117,7 @@ public class CadastroActivity extends AppCompatActivity {
                 }
 
                 cadastroDAO.close();
-                Toast.makeText(getApplicationContext(),
-                        "Cliente " + cliente.getNomeCompleto() + " cadastrado",
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Cliente " + cliente.getNomeCompleto() + " cadastrado", Toast.LENGTH_LONG).show();
                 finish();
             }
         });

@@ -7,10 +7,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main"
-    android:padding="15dp">
+    android:padding="10dp">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/listaCliente"
+        android:id="@+id/rvClientes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

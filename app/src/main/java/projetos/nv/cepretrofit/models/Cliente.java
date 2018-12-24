@@ -11,6 +11,8 @@ public class Cliente implements Serializable {
 
     private String cpf;
 
+    private String cep;
+
     private Endereco endereco;
 
     private Date dataNascimento;
@@ -49,6 +51,14 @@ public class Cliente implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public Endereco getEndereco() {

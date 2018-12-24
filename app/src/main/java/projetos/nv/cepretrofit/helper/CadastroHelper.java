@@ -111,11 +111,10 @@ public class CadastroHelper {
         this.endereco = enderecoResponse;
     }
     
-    public Cliente inserirCliente(){
+    public Cliente inserirCliente(Endereco endereco){
         cliente.setNomeCompleto(nomeCompleto.getText().toString());
         cliente.setCpf(cpf.getText().toString());
         cliente.setEndereco(endereco);
-
         String dateString = dataNascimento.getText().toString();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         try {
