@@ -13,10 +13,13 @@
     <string name="bairro">Bairro...</string>
     <string name="cidade">Cidade...</string>
     <string name="uf">UF...</string>
+    <string name="pesquisar_mapa">Pesquisar no mapa</string>
+    <string name="cancelar">Cancelar</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="nome">Nome:</string>
     <string name="cpf">CPF:</string>
     <string name="data_nascimento">Data de nascimento:</string>
     <string name="cep">CEP:</string>
     <string name="deletar">Deletar</string>
+    <string name="pesquisar_nome">Pesquise pelo nome...</string>
 </resources>

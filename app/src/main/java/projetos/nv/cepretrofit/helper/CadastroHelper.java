@@ -21,6 +21,8 @@ public class CadastroHelper {
     private EditText cep, numero, complemento;
     private TextView logradouro, bairro, localidade, uf;
     private Button btnBuscarCep;
+    private Button btnPesquisarMapa;
+    private Button btnCancelar;
     private Button btnCadastrarCliente;
     private Endereco endereco;
     private Cliente cliente;
@@ -31,6 +33,22 @@ public class CadastroHelper {
 
     public void setBtnBuscarCep(Button btnBuscarCep) {
         this.btnBuscarCep = btnBuscarCep;
+    }
+
+    public Button getBtnPesquisarMapa() {
+        return btnPesquisarMapa;
+    }
+
+    public void setBtnPesquisarMapa(Button btnPesquisarMapa) {
+        this.btnPesquisarMapa = btnPesquisarMapa;
+    }
+
+    public Button getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(Button btnCancelar) {
+        this.btnCancelar = btnCancelar;
     }
 
     public Button getBtnCadastrarCliente() {
@@ -71,6 +89,8 @@ public class CadastroHelper {
         uf = activity.findViewById(R.id.ufId);
 
         btnBuscarCep = activity.findViewById(R.id.btnBuscarCep);
+        btnPesquisarMapa  = activity.findViewById(R.id.btnPesquisarMapa);
+        btnCancelar = activity.findViewById(R.id.btnCancelar);
         btnCadastrarCliente = activity.findViewById(R.id.btnCadastrarCliente);
 
         endereco = new Endereco();

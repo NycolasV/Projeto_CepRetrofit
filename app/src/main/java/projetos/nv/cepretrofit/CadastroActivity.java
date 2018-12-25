@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,8 @@ public class CadastroActivity extends AppCompatActivity {
     private TextView dataNascimento;
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private Button btnBuscarCep;
+    private Button btnPesquisarMapa;
+    private Button btnCancelar;
     private Button btnCadastrarCliente;
     private CadastroHelper helper;
     private CadastroDAO cadastroDAO;
@@ -48,6 +51,8 @@ public class CadastroActivity extends AppCompatActivity {
         cep = helper.getCep();
         dataNascimento = helper.getDataNascimento();
         btnBuscarCep = helper.getBtnBuscarCep();
+        btnPesquisarMapa = helper.getBtnPesquisarMapa();
+        btnCancelar = helper.getBtnCancelar();
         btnCadastrarCliente = helper.getBtnCadastrarCliente();
 
         dataNascimento.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +89,7 @@ public class CadastroActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Endereco> call, Response<Endereco> response) {
                         Endereco endereco = response.body();
-                        if (enderecoId != null){
+                        if (enderecoId != null) {
                             endereco.setId(enderecoId);
                             helper.consultarCep(endereco);
                         } else {
@@ -100,6 +105,15 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
 
+        btnPesquisarMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri location = Uri.parse("geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+California");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+                startActivity(mapIntent);
+            }
+        });
+
         final Bundle extras = getIntent().getExtras();
         Long clienteId = (extras != null) ? extras.getLong("clienteId") : null;
         if (clienteId != null) {
@@ -110,7 +124,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         btnCadastrarCliente.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 cadastroDAO = new CadastroDAO(CadastroActivity.this);
                 Endereco endereco = helper.inserirEndereco();
                 Cliente cliente = helper.inserirCliente(endereco);
@@ -125,6 +139,13 @@ public class CadastroActivity extends AppCompatActivity {
 
                 cadastroDAO.close();
                 Toast.makeText(getApplicationContext(), "Cliente " + cliente.getNomeCompleto() + " cadastrado", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });

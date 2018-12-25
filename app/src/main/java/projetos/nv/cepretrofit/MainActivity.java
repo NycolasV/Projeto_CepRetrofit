@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -19,10 +20,11 @@ import projetos.nv.cepretrofit.dao.CadastroDAO;
 import projetos.nv.cepretrofit.models.Cliente;
 import projetos.nv.cepretrofit.models.Endereco;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private RecyclerView rvClientes;
     private RecyclerViewAdapter adapter;
+    private SearchView campoPesquisa;
     private CadastroDAO dao;
 
     @Override
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         rvClientes = findViewById(R.id.rvClientes);
+        campoPesquisa = findViewById(R.id.campoPesquisaId);
+        campoPesquisa.setOnQueryTextListener(MainActivity.this);
         dao = new CadastroDAO(this);
         resumeList(dao.buscarTodosClientes());
 
@@ -68,5 +72,18 @@ public class MainActivity extends AppCompatActivity {
             dao = new CadastroDAO(this);
             resumeList(dao.buscarTodosClientes());
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String nomePesquisado) {
+        CadastroDAO dao = new CadastroDAO(this);
+        resumeList(dao.buscarClientePorNome(nomePesquisado));
+
+        return false;
     }
 }
