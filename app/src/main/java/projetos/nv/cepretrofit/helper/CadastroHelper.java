@@ -131,7 +131,6 @@ public class CadastroHelper {
         nomeCompleto.setText(clienteRecover.getNomeCompleto());
         cpf.setText(clienteRecover.getCpf());
         preencherEndereco(clienteRecover.getEndereco());
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dataNascimento.setText(dateFormat.format(clienteRecover.getDataNascimento()));
 

@@ -43,7 +43,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 final Activity context = (Activity) v.getContext();
                 final Intent intent = new Intent(context, CadastroActivity.class);
-                intent.putExtra("clienteId", clienteId)   ;
+                intent.putExtra("clienteId", clienteId);
                 context.startActivityForResult(intent, 1);
             }
         });
@@ -66,6 +66,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
                         }
                         final Activity context = (Activity) v.getContext();
                         final Intent intent = new Intent(context, MainActivity.class);
+                        intent.putExtra("delete", true);
                         context.startActivityForResult(intent, 1);
                         return false;
                     }

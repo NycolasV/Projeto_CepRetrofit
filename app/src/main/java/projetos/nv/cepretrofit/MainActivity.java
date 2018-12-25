@@ -58,7 +58,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        dao = new CadastroDAO(this);
-        resumeList(dao.buscarTodosClientes());
+        final Bundle extras = getIntent().getExtras();
+        Boolean delete = (extras != null) ? extras.getBoolean("delete") : false;
+        if (delete == true){
+            dao = new CadastroDAO(this);
+            resumeList(dao.buscarTodosClientes());
+            finish();
+        } else {
+            dao = new CadastroDAO(this);
+            resumeList(dao.buscarTodosClientes());
+        }
     }
 }

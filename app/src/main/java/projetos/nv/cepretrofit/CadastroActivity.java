@@ -36,6 +36,7 @@ public class CadastroActivity extends AppCompatActivity {
     private Button btnCadastrarCliente;
     private CadastroHelper helper;
     private CadastroDAO cadastroDAO;
+    private Long enderecoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,12 @@ public class CadastroActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Endereco> call, Response<Endereco> response) {
                         Endereco endereco = response.body();
-                        helper.consultarCep(endereco);
+                        if (enderecoId != null){
+                            endereco.setId(enderecoId);
+                            helper.consultarCep(endereco);
+                        } else {
+                            helper.consultarCep(endereco);
+                        }
                     }
 
                     @Override
@@ -98,6 +104,7 @@ public class CadastroActivity extends AppCompatActivity {
         Long clienteId = (extras != null) ? extras.getLong("clienteId") : null;
         if (clienteId != null) {
             Cliente clienteClicked = cadastroDAO.buscarCliente(clienteId);
+            enderecoId = clienteClicked.getEndereco().getId();
             helper.preencherCliente(clienteClicked);
         }
 
