@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 
 import projetos.nv.cepretrofit.CadastroActivity;
+import projetos.nv.cepretrofit.MainActivity;
 import projetos.nv.cepretrofit.R;
 import projetos.nv.cepretrofit.adapter.RecyclerViewAdapter;
 import projetos.nv.cepretrofit.dao.CadastroDAO;
@@ -39,10 +42,36 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 final Activity context = (Activity) v.getContext();
-
                 final Intent intent = new Intent(context, CadastroActivity.class);
                 intent.putExtra("clienteId", clienteId)   ;
                 context.startActivityForResult(intent, 1);
+            }
+        });
+
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(final View v) {
+                PopupMenu popup = new PopupMenu(context, view);
+                popup.inflate(R.menu.menu_main);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.itemDeletar:
+                                dao = new CadastroDAO(context);
+                                Cliente clienteDeletado = dao.buscarCliente(clienteId);
+                                dao.removerEndereco(clienteDeletado.getEndereco());
+                                dao.removerCliente(clienteDeletado);
+                                break;
+                        }
+                        final Activity context = (Activity) v.getContext();
+                        final Intent intent = new Intent(context, MainActivity.class);
+                        context.startActivityForResult(intent, 1);
+                        return false;
+                    }
+                });
+                popup.show();
+                return true;
             }
         });
     }

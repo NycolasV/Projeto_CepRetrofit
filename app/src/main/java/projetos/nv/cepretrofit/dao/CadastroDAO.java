@@ -219,10 +219,6 @@ public class CadastroDAO extends SQLiteOpenHelper {
 
         // Pegando o endereco da tabela tb_endereco a partir do Id
         Long enderecoId = c.getLong(c.getColumnIndex(COLUNA_ID_ENDERECO));
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues dados = new ContentValues();
-        dados.put(COLUNA_ENDERECO_ID, enderecoId);
-        db.insert(NOME_TABELA_CLIENTE, null, dados);
         Endereco endereco = buscarEndereco(enderecoId);
         cliente.setEndereco(endereco);
 

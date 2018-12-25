@@ -92,7 +92,7 @@ public class CadastroHelper {
     
     public void preencherEndereco(Endereco enderecoRecover){
         cep.setText(enderecoRecover.getCep());
-        numero.setText(enderecoRecover.getNumero());
+        numero.setText(Integer.toString(enderecoRecover.getNumero()));
         complemento.setText(enderecoRecover.getComplemento());
         logradouro.setText(enderecoRecover.getLogradouro());
         bairro.setText(enderecoRecover.getBairro());
