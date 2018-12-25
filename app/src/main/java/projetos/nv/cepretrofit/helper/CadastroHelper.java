@@ -75,6 +75,22 @@ public class CadastroHelper {
         this.cep = cep;
     }
 
+    public EditText getNumero() {
+        return numero;
+    }
+
+    public void setNumero(EditText numero) {
+        this.numero = numero;
+    }
+
+    public TextView getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(TextView logradouro) {
+        this.logradouro = logradouro;
+    }
+
     public CadastroHelper(CadastroActivity activity) {
         nomeCompleto = activity.findViewById(R.id.nomeCompletoId);
         cpf= activity.findViewById(R.id.cpfId);

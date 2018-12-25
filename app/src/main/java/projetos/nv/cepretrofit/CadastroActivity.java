@@ -30,13 +30,12 @@ import retrofit2.Response;
 
 public class CadastroActivity extends AppCompatActivity {
 
-    private EditText cep;
+    private EditText cep, numero;
+    private TextView logradouro;
     private TextView dataNascimento;
     private DatePickerDialog.OnDateSetListener dateSetListener;
-    private Button btnBuscarCep;
-    private Button btnPesquisarMapa;
-    private Button btnCancelar;
-    private Button btnCadastrarCliente;
+    private Button btnBuscarCep, btnPesquisarMapa;
+    private Button btnCancelar, btnCadastrarCliente;
     private CadastroHelper helper;
     private CadastroDAO cadastroDAO;
     private Long enderecoId;
@@ -48,8 +47,11 @@ public class CadastroActivity extends AppCompatActivity {
 
         cadastroDAO = new CadastroDAO(getApplicationContext());
         helper = new CadastroHelper(this);
-        cep = helper.getCep();
+
         dataNascimento = helper.getDataNascimento();
+        cep = helper.getCep();
+        numero = helper.getNumero();
+        logradouro = helper.getLogradouro();
         btnBuscarCep = helper.getBtnBuscarCep();
         btnPesquisarMapa = helper.getBtnPesquisarMapa();
         btnCancelar = helper.getBtnCancelar();
@@ -108,7 +110,13 @@ public class CadastroActivity extends AppCompatActivity {
         btnPesquisarMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri location = Uri.parse("geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+California");
+                String numeroStr = numero.getText().toString();
+                String logradouroStr = logradouro.getText().toString();
+                String cepStr = cep.getText().toString();
+
+                // Uri location com sintaxe: geo:0,0?q=número+rua+cep
+                String enderecoPesquisado = numeroStr + ", " + logradouroStr + ", " + cepStr;
+                Uri location = Uri.parse("geo:0,0?q=" + Uri.encode(enderecoPesquisado));
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
                 startActivity(mapIntent);
             }
