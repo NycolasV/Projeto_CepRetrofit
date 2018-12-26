@@ -22,6 +22,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter{
         this.clientes = clientes;
     }
 
+    /**
+     * Métodos para enviar os dados recebidos da MainActivity para o RecyclerViewHolder
+     */
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_cliente, viewGroup, false);

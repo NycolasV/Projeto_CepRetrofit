@@ -9,6 +9,7 @@ public class RetrofitConfig {
     private final Retrofit retrofit;
     private static final String BASE_URL = "http://viacep.com.br/ws/";
 
+    // URL para conexão com a API e convertendo em JacksonFactory
     public RetrofitConfig() {
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -16,6 +17,7 @@ public class RetrofitConfig {
                 .build();
     }
 
+    // Criando a interface para a utilização dos métodos
     public EnderecoService getEnderecoService(){
         return this.retrofit.create(EnderecoService.class);
     }

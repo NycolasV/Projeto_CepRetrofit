@@ -38,6 +38,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         dataNascimento = view.findViewById(R.id.cardDataNascimento);
         cep = view.findViewById(R.id.cardCep);
 
+        // Envia o ID do cliente para a tela de cadastro
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +49,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
+        // Ao segurar o card, ele abre uma opção para deletar o elemento
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
@@ -77,6 +79,9 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
+    /**
+     * Método para inserir os dados resgatados do cliente no CardView
+     */
     public void preencher(Cliente cliente) {
         clienteId = cliente.getId();
         nomeCompleto.setText(cliente.getNomeCompleto());

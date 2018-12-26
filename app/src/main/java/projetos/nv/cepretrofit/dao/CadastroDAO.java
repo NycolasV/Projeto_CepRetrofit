@@ -65,7 +65,7 @@ public class CadastroDAO extends SQLiteOpenHelper {
             + COLUNA_ID_CLIENTE + " INTEGER PRIMARY KEY," + COLUNA_NOME_COMPLETO + " TEXT NOT NULL,"
             + COLUNA_CPF + " TEXT NOT NULL," + COLUNA_DATA_NASCIMENTO + " TEXT NOT NULL," + COLUNA_ENDERECO_ID + " INTEGER)";
 
-    // TENTATIVA DE FOREIGN KEY
+    // Tentativa de criação de uma tabela com FOREIGN KEY - Falho no SQLite, porém útil para registro e futuras novas tentativas
 //    public static final String CREATE_TB_CLIENTE = "CREATE TABLE " + NOME_TABELA_CLIENTE + "("
 //            + COLUNA_ID_CLIENTE + " INTEGER PRIMARY KEY," + COLUNA_NOME_COMPLETO + " TEXT NOT NULL,"
 //            + COLUNA_CPF + " TEXT NOT NULL," + COLUNA_DATA_NASCIMENTO + " TEXT NOT NULL," + COLUNA_ENDERECO_ID + " INTEGER,"
@@ -123,18 +123,27 @@ public class CadastroDAO extends SQLiteOpenHelper {
         return dados;
     }
 
+    /**
+     * Método de cadastro na tabela de enderecos
+     */
     public void persistirEndereco(Endereco endereco) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues dados = contentValuesEndereco(endereco);
         db.insert(NOME_TABELA_ENDERECO, null, dados);
     }
 
+    /**
+     * Método de exclusão na tabela de enderecos
+     */
     public void removerEndereco(Endereco endereco) {
         SQLiteDatabase db = getWritableDatabase();
         String[] parametros = {endereco.getId().toString()};
         db.delete(NOME_TABELA_ENDERECO, "id = ?", parametros);
     }
 
+    /**
+     * Método de edição na tabela de enderecos
+     */
     public void alterarEndereco(Endereco endereco) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues dados = contentValuesEndereco(endereco);
@@ -158,6 +167,9 @@ public class CadastroDAO extends SQLiteOpenHelper {
         return endereco;
     }
 
+    /**
+     * Busca de endereço a partir de um determinado ID
+     */
     public Endereco buscarEndereco(Long enderecoId) {
         Endereco endereco;
         SQLiteDatabase db = getWritableDatabase();
@@ -190,18 +202,27 @@ public class CadastroDAO extends SQLiteOpenHelper {
         return dados;
     }
 
+    /**
+     * Método de cadastro na tabela de clientes
+     */
     public void persistirCliente(Cliente cliente) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues dados = contentValuesCliente(cliente);
         db.insert(NOME_TABELA_CLIENTE, null, dados);
     }
 
+    /**
+     * Método de exclusão na tabela de clientes
+     */
     public void removerCliente(Cliente cliente) {
         SQLiteDatabase db = getWritableDatabase();
         String[] parametros = {cliente.getId().toString()};
         db.delete(NOME_TABELA_CLIENTE, "id = ?", parametros);
     }
 
+    /**
+     * Método de edição na tabela de clientes
+     */
     public void alterarCLiente(Cliente cliente) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues dados = contentValuesCliente(cliente);
@@ -235,6 +256,9 @@ public class CadastroDAO extends SQLiteOpenHelper {
         return cliente;
     }
 
+    /**
+     * Método para listar todos os clientes registrados na tabela
+     */
     public List<Cliente> buscarTodosClientes() {
         String sql = "SELECT * FROM " + NOME_TABELA_CLIENTE;
         SQLiteDatabase db = getReadableDatabase();
@@ -255,6 +279,9 @@ public class CadastroDAO extends SQLiteOpenHelper {
         return clientes;
     }
 
+    /**
+     * Busca de um cliente a partir de um determinado ID
+     */
     public Cliente buscarCliente(Long clienteId) {
         Cliente cliente;
         SQLiteDatabase db = getWritableDatabase();
@@ -274,6 +301,11 @@ public class CadastroDAO extends SQLiteOpenHelper {
         return cliente;
     }
 
+
+    /**
+     * Busca de um cliente a partir de determinado nome
+     * Método para pesquisar clientes pelo SearchView na MainActivity
+     */
     public List<Cliente> buscarClientePorNome(String textoPesquisado) {
         SQLiteDatabase db = getWritableDatabase();
 

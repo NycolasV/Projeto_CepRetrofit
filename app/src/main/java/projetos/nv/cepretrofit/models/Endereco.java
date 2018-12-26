@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 
+// Elementos ignorados na response da Json
 @JsonIgnoreProperties({"complemento", "unidade", "ibge", "gia"})
 public class Endereco implements Serializable {
 
+    // Variáveis
     private Long id;
 
     private String cep;
@@ -23,6 +25,9 @@ public class Endereco implements Serializable {
 
     private String uf;
 
+    private Boolean erro;
+
+    // Construtores
     public Endereco() {
 
     }
@@ -31,6 +36,7 @@ public class Endereco implements Serializable {
         this.cep = cep;
     }
 
+    // Getters && Setters
     public Long getId() {
         return id;
     }
@@ -95,4 +101,11 @@ public class Endereco implements Serializable {
         this.uf = uf;
     }
 
+    public Boolean getErro() {
+        return erro;
+    }
+
+    public void setErro(Boolean erro) {
+        this.erro = erro;
+    }
 }

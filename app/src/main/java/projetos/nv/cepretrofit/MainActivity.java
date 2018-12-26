@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         dao = new CadastroDAO(this);
         resumeList(dao.buscarTodosClientes());
 
+        // Botão para cadastrar cliente
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.idAddBtn);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         });
     }
 
+    /**
+     * Método para criar lista de clientes
+     */
     private void resumeList(List<Cliente> clientes) {
         adapter = new RecyclerViewAdapter(this, clientes);
         rvClientes.setAdapter(adapter);
@@ -59,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         rvClientes.setNestedScrollingEnabled(true);
     }
 
+    /**
+     * Método para iniciar a Activity, atualiza a lista e, caso elemento deletado, elimina a Activity extra
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -74,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         }
     }
 
+    /**
+     * Métodos do SearchView para inserir elemento pesquisado
+     */
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;

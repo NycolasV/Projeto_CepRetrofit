@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Cliente implements Serializable {
 
+    // Variáveis
     private Long id;
 
     private String nomeCompleto;
@@ -17,6 +18,7 @@ public class Cliente implements Serializable {
 
     private Date dataNascimento;
 
+    // Construtores
     public Cliente() {
 
     }
@@ -29,6 +31,7 @@ public class Cliente implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
+    // Getters && Setters
     public Long getId() {
         return id;
     }

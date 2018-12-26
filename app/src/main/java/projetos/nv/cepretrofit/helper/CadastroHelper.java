@@ -4,7 +4,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +26,9 @@ public class CadastroHelper {
     private Endereco endereco;
     private Cliente cliente;
 
+    /**
+     * Getters && Setters de alguns elementos necessários na activity de cadastro
+     */
     public Button getBtnBuscarCep() {
         return btnBuscarCep;
     }
@@ -57,6 +59,22 @@ public class CadastroHelper {
 
     public void setBtnCadastrarCliente(Button btnCadastrarCliente) {
         this.btnCadastrarCliente = btnCadastrarCliente;
+    }
+
+    public EditText getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(EditText nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
+    public EditText getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(EditText cpf) {
+        this.cpf = cpf;
     }
 
     public TextView getDataNascimento() {
@@ -91,9 +109,12 @@ public class CadastroHelper {
         this.logradouro = logradouro;
     }
 
+    /**
+     * Método para conexão da página xml e das variáveis locais
+     */
     public CadastroHelper(CadastroActivity activity) {
         nomeCompleto = activity.findViewById(R.id.nomeCompletoId);
-        cpf= activity.findViewById(R.id.cpfId);
+        cpf = activity.findViewById(R.id.cpfId);
         dataNascimento = activity.findViewById(R.id.dataNascimentoId);
 
         cep = activity.findViewById(R.id.cepId);
@@ -105,7 +126,7 @@ public class CadastroHelper {
         uf = activity.findViewById(R.id.ufId);
 
         btnBuscarCep = activity.findViewById(R.id.btnBuscarCep);
-        btnPesquisarMapa  = activity.findViewById(R.id.btnPesquisarMapa);
+        btnPesquisarMapa = activity.findViewById(R.id.btnPesquisarMapa);
         btnCancelar = activity.findViewById(R.id.btnCancelar);
         btnCadastrarCliente = activity.findViewById(R.id.btnCadastrarCliente);
 
@@ -113,7 +134,10 @@ public class CadastroHelper {
         cliente = new Cliente();
     }
 
-    public Endereco inserirEndereco(){
+    /**
+     * Método para inserir os dados na classe Endereco
+     */
+    public Endereco inserirEndereco() {
         endereco.setCep(cep.getText().toString());
         int numeroInt = Integer.parseInt(numero.getText().toString());
         endereco.setNumero(numeroInt);
@@ -125,8 +149,11 @@ public class CadastroHelper {
 
         return endereco;
     }
-    
-    public void preencherEndereco(Endereco enderecoRecover){
+
+    /**
+     * Pega os elementos de um Cliente existente e inserem na tela de cadastro
+     */
+    public void preencherEndereco(Endereco enderecoRecover) {
         cep.setText(enderecoRecover.getCep());
         numero.setText(Integer.toString(enderecoRecover.getNumero()));
         complemento.setText(enderecoRecover.getComplemento());
@@ -138,7 +165,10 @@ public class CadastroHelper {
         this.endereco = enderecoRecover;
     }
 
-    public void consultarCep(Endereco enderecoResponse){
+    /**
+     * Método que retorna os elementos da response da Json na tela de cadastro
+     */
+    public void consultarCep(Endereco enderecoResponse) {
         logradouro.setText(enderecoResponse.getLogradouro());
         bairro.setText(enderecoResponse.getBairro());
         localidade.setText(enderecoResponse.getLocalidade());
@@ -146,8 +176,11 @@ public class CadastroHelper {
 
         this.endereco = enderecoResponse;
     }
-    
-    public Cliente inserirCliente(Endereco endereco){
+
+    /**
+     * Método para inserir os dados na classe Cliente
+     */
+    public Cliente inserirCliente(Endereco endereco) {
         cliente.setNomeCompleto(nomeCompleto.getText().toString());
         cliente.setCpf(cpf.getText().toString());
         cliente.setEndereco(endereco);
@@ -163,7 +196,10 @@ public class CadastroHelper {
         return cliente;
     }
 
-    public void preencherCliente(Cliente clienteRecover){
+    /**
+     * Pega os elementos de um Cliente existente e inserem na tela de cadastro
+     */
+    public void preencherCliente(Cliente clienteRecover) {
         nomeCompleto.setText(clienteRecover.getNomeCompleto());
         cpf.setText(clienteRecover.getCpf());
         preencherEndereco(clienteRecover.getEndereco());
