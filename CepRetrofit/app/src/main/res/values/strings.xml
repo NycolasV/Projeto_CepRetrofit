@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Agenda de Clientes</string>
+    <string name="action_settings">Settings</string>
+    <string name="cadastro_clientes">Cadastro de clientes</string>
+    <string name="inserir_nome_completo">Inserir nome completo...</string>
+    <string name="inserir_data_nascimento">Inserir data de nascimento...</string>
+    <string name="inserir_cpf">Inserir CPF...</string>
+    <string name="inserir_cep">Inserir CEP...</string>
+    <string name="buscar">Buscar CEP</string>
+    <string name="numero">Número...</string>
+    <string name="complemento">Complemento...</string>
+    <string name="logradouro">Logradouro...</string>
+    <string name="bairro">Bairro...</string>
+    <string name="cidade">Cidade...</string>
+    <string name="uf">UF...</string>
+    <string name="pesquisar_mapa">Pesquisar no mapa</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="nome">Nome:</string>
+    <string name="cpf">CPF:</string>
+    <string name="data_nascimento">Data de nascimento:</string>
+    <string name="cep">CEP:</string>
+    <string name="deletar">Deletar</string>
+    <string name="pesquisar_nome">Pesquise pelo nome...</string>
+</resources>
